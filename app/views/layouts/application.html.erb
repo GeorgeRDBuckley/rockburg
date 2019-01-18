@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-LRlmVvLKVApDVGuspQFnRQJjkv0P7/YFrw84YYQtmYG4nK8c+M+NlmYDCv0rKWpG" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.typekit.net/bfh3gim.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/trianglify/1.1.0/trianglify.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
   </head>
 
-  <body data-controller="<%= controller.controller_path %>" data-action="<%= controller.action_name %>" data-id="<%= params[:id].to_i if params[:id].present? %>">
+  <body data-controller="<%= controller.controller_path %>" data-action="<%= controller.action_name %>" data-id="<%= params[:id].to_i if params[:id].present? %>" class="<%= @body_class %>">
     <div class="wrapper">
       <header role="banner">
         <div class="logo">

@@ -58,6 +58,7 @@ gem 'font-awesome-rails' # icons
 gem 'figaro' # environment variables
 gem 'merit', github: 'Rockburg/merit', branch: :master # badge system
 gem 'httparty'
+gem 'humanize' # Convert numbers to words
 
 group :development, :test do
   gem 'pry'

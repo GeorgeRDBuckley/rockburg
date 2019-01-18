@@ -1,6 +1,118 @@
-<h1><%= @band.name %> <span class="badge badge-secondary"><%= @band.genre.name %> - <%= @band.genre.style %></span></h1>
-<h3 class="">Fans: <span class="data-fans"><%= @band.fans %></span> &bull; Buzz: <span class="data-buzz"><%= @band.buzz %></span></h3>
-<hr>
+<% @body_class = "full-width" %>
+<section class="profile-header band-profile">
+  <div class="info">
+    <div class="band-avatar">
+      <ul class="band-members" data-member-count="<%= @band.genre.skills.count %>">
+        <% @band.genre.skills.each do |genre_skill| %>
+          <% member = @band.members.with_skill(genre_skill).first %>
+          <li>
+            <%= image_tag member.avatar_url %>
+            <div class="tooltip">
+              <h6><%= member.name %></h6>
+              <ul class="skills">
+                <li><%= render partial: "skills/progress", locals: {skill_name: member.primary_skill.name, skill_level: member.skill_primary_level} %></li>
+                <li><%= render partial: "skills/progress", locals: {skill_name: "Fatigue", skill_level: member.trait_fatigue, negative: true} %></li>
+                <li><%= render partial: "skills/progress", locals: {skill_name: "Looks", skill_level: member.trait_looks} %></li>
+                <li><%= render partial: "skills/progress", locals: {skill_name: "Creativity", skill_level: member.trait_creativity} %></li>
+                <li><%= render partial: "skills/progress", locals: {skill_name: "Ego", skill_level: member.trait_ego, negative: true} %></li>
+              </ul>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="about">
+      <h1><%= @band.name %></h1>
+      <h2><%= @band.genre.name %>: <%= @band.genre.style %></h2>
+      <h3><u class="data-fans"><%= @band.fans %></u> fans, <u class="data-buzz"><%= @band.buzz %></u> buzz</h3>
+    </div>
+  </div>
+</section>
+
+<section class="actions">
+  <div class="action_items">
+    <a href="#" class="chooser" data-target="practice"><b>Practice</b> <span>Improves the skill level of each member</span></a>
+    <a href="#" class="chooser" data-target="gig"><b>Gig</b> <span>Gain fans and make money</span></a>
+    <a href="#" class="chooser" data-target="write-song"><b>Write</b> <span>Needed to play gigs and grow fans</span></a>
+    <a href="#" class="chooser" data-target="record"><b>Record</b> <span>Gets a song ready to release</span></a>
+    <a href="#"><b>Release</b> <span>Put your song out there to make money</span></a>
+    <a href="#"><b>Rest</b> <span>Too fatigued? Bad things will happen</span></a>
+  </div>
+  <div class="choices">
+    <% if @activity %>
+    <div class="current_activity">
+      Currently <%= @activity.humanize_action.downcase %> for <b data-endtimes="<%= @activity.ends_at %>"></b>
+    </div>
+    <% end %>
+    <div class="activity_success" style="display:none;"></div>
+    <div class="choice" data-choice-type="practice">
+      <h4>How long would you like to practice?</h4>
+      <h5>The longer you practice the more skill points you may receive</h5>
+      <ul>
+        <li><%= link_to "5 minutes", new_band_activity_path(band_id: @band.id, type: 'practice', hours: '5') %></li>
+        <li><%= link_to "15 minutes", new_band_activity_path(band_id: @band.id, type: 'practice', hours: '15') %></li>
+        <li><%= link_to "30 minutes", new_band_activity_path(band_id: @band.id, type: 'practice', hours: '30') %></li>
+        <li><%= link_to "1 hour", new_band_activity_path(band_id: @band.id, type: 'practice', hours: '60') %></li>
+      </ul>
+    </div>
+
+    <div class="choice" data-choice-type="gig">
+      <h4>What venue would you like to play?</h4>
+      <h5>Choose a venue carefully! If you choose a high-cap venue but aren't able to sell many tickets, it will hurt the perception (and future fans) of your band.</h5>
+      
+      <div class="items">
+      <% Venue.order('capacity ASC').each do |venue| %>
+          <%= link_to(new_band_activity_path(band_id: @band.id, type: 'gig', venue: venue.id)) do %>
+          <b><%= venue.name %></b>
+          <span>Capacity: <strong><%= number_with_delimiter(venue.capacity) %></strong></span>
+          <% end %>
+      <% end %>
+      </div>
+    </div>
+
+    <div class="choice" data-choice-type="write-song">
+      <h4>How long would you like to write a song?</h4>
+      <h5>The longer you spend on your song, the higher quality it will be.</h5>
+      <ul>
+        <li><%= link_to "2 minutes", new_band_activity_path(band_id: @band.id, type: 'write_song', hours: '2') %></li>
+        <li><%= link_to "10 minutes", new_band_activity_path(band_id: @band.id, type: 'write_song', hours: '10') %></li>
+        <li><%= link_to "30 minutes", new_band_activity_path(band_id: @band.id, type: 'write_song', hours: '30') %></li>
+        <li><%= link_to "1 hour", new_band_activity_path(band_id: @band.id, type: 'write_song', hours: '60') %></li>
+      </ul>
+    </div>
+
+    <div class="choice" data-choice-type="record">
+      <h4>Record a song</h4>
+      <%= form_tag("/bands/#{@band.id}/activities/new", method: "get") do %>
+        <%= hidden_field_tag 'type', 'record_single' %>
+        <h5>What song would you like to record?</h5>
+        <% @band.songs.each do |song| %>
+        <div class="form-group">
+          <%= radio_button_tag(:song_id, song.id, false, class: '') %>
+          <label class="form-check-label">
+            <%= song.name %> (Quality: <%= song.quality %>)
+          </label>
+        </div>
+        <% end %>
+
+        
+        <div class="form-group">
+          <label>What studio would you like to use?</label>
+          <%= collection_select(:studio, :studio_id, Studio.all, :id, :full_studio, class: 'form-control') %>
+        </div>
+
+      <% end %>
+
+    </div>
+
+
+
+  </div>
+</section>
+
+
+
+
 <div class="row">
   <% if manager_signed_in? and @band.manager == current_manager %>
   <div class="col-sm-6">

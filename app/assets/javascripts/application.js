@@ -10,31 +10,63 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require rails-ujs
 //= require_tree .
 
-// $(document).ready(function() {
-//   $('.modal.bankrupt').modal({backdrop:'static',keyboard:false, show:true});
+$(document).ready(function() {
+  //$('.modal.bankrupt').modal({backdrop:'static',keyboard:false, show:true});
 
-//   $('[data-endtimes]').each(function() {
-//     var $this = $(this), finalDate = $(this).data('endtimes');
-//     $this.countdown(finalDate, function(event) {
-//       var str = "";
-//      // if 0 number of days, show H:M:S
-//      if(parseInt(event.strftime('%D')) == 0) {
-//          str = event.strftime('%-H hour%!H %-M minute%!M %-S second%!S');
-//          // if 0 days 0 hours, show M:S
-//          if(parseInt(event.strftime('%H')) == 0) {
-//             str = event.strftime('%-M minute%!M %-S second%!S');
-//             // if 0 days 0 hours 0 minutes, show only Seconds
-//             if(parseInt(event.strftime('%M')) == 0) {
-//                str = event.strftime('%-S second%!S');
-//             }
-//          }
-//      } else {
-//          str = event.strftime('%-D day%!D %-H hour%!H %-M minute%!M %-S second%!S');
-//      }
-//       $(this).html(str);
-//     });
-//   });
-// });
+  $('[data-endtimes]').each(function() {
+    var $this = $(this), finalDate = $(this).data('endtimes');
+    $this.countdown(finalDate, function(event) {
+      var str = "";
+     // if 0 number of days, show H:M:S
+     if(parseInt(event.strftime('%D')) == 0) {
+         str = event.strftime('%-H hour%!H %-M minute%!M %-S second%!S');
+         // if 0 days 0 hours, show M:S
+         if(parseInt(event.strftime('%H')) == 0) {
+            str = event.strftime('%-M minute%!M %-S second%!S');
+            // if 0 days 0 hours 0 minutes, show only Seconds
+            if(parseInt(event.strftime('%M')) == 0) {
+               str = event.strftime('%-S second%!S');
+            }
+         }
+     } else {
+         str = event.strftime('%-D day%!D %-H hour%!H %-M minute%!M %-S second%!S');
+     }
+      $(this).html(str);
+    });
+  });
+
+  $('.album-art').each(function(index){
+    var $this = $(this);
+    var pattern = Trianglify({
+      width: $this.data('size'),
+      height: $this.data('size'),
+      cell_size: $this.data('size') / 4,
+      variance: 0.75,
+      x_colors: 'random',
+      seed: $this.data('seed')
+    });
+
+    $this.append(pattern.canvas());
+  });
+
+  $(".tabs a").click(function(e){
+    e.preventDefault();
+
+    var tabid = $(this).data('tab');
+    $('.tab-content').hide();
+    $('.tabs a').removeClass('active');
+    $(this).addClass('active');
+    $('#'+tabid).show();
+  });
+
+  $(".chooser").click(function(e){
+    e.preventDefault();
+
+    var target = $(this).data('target');
+    $('.choice').hide();
+    $('[data-choice-type='+target+']').fadeIn(100);
+  });
+
+});

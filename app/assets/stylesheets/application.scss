@@ -207,9 +207,76 @@ header[role=banner] {
     display: table;
   }
 }
+.full-width {
+  .content {
+    padding: 0;
+  }
+}
 
 footer {
   margin: 0 20px;
+}
+
+.btn {
+  padding: 15px;
+  border-radius: 8px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.2em;
+  cursor: pointer;
+  background: $blue;
+  border: 3px solid darken(desaturate($blue, 15%), 5%);
+  box-shadow: 0 3px 0 darken(desaturate($blue, 15%), 5%);
+  &:hover {
+    background: darken($blue, 5%);
+    border: 3px solid darken(desaturate($blue, 15%), 10%);
+    box-shadow: 0 3px 0 darken(desaturate($blue, 15%), 10%);
+  }
+}
+
+form {
+  .form-group {
+    margin-bottom: 15px;
+  }
+  label {
+    display: block;
+    margin-bottom: 3px;
+    font-size: 1.2em;
+  }
+  input[type=text] {
+    background: $lightgray;
+    border: 2px solid $gray;
+    border-radius: 10px;
+    padding: 5px 15px;
+    font-weight: bold;
+    font-size: 1.2em;
+    line-height: 1.8em;
+    width: 90%;
+    &:focus {
+      background: white;
+      border: 2px solid $lightgray;
+      outline: none;
+    }
+  }
+  select {
+    width: 93%;
+    padding: 5px 15px;
+    line-height: 1.8em;
+    font-size: 1.2em;
+    font-weight: bold;
+    border: 2px solid $gray;
+    background: $lightgray;
+    outline: none;
+    border-radius: 10px;
+    -webkit-appearance: none; 
+    -moz-appearance: none;
+    appearance: none;       /* remove default arrow */
+    //background-image: url(...);   /* add custom arrow */
+    &::-ms-expand { 
+      display: none; /* hide the default arrow in ie10 and ie11 */
+    }
+  }
 }
 
 .band-listing {
@@ -327,6 +394,15 @@ footer {
           }
           img {
             width: 33%;
+          }
+        }
+
+        &[data-member-count='1'] {
+          > li {
+            margin: 0;
+            img {
+              width: 50%;
+            }
           }
         }
       }
@@ -460,7 +536,6 @@ footer {
   display: grid;
   column-gap: 20px;
   grid-template-columns: 2fr 3fr;
-  grid-template-rows: 100%;
 
   .action_items {
     list-style: none;
@@ -499,7 +574,13 @@ footer {
     grid-column: 2;
     grid-row: row;
     text-align: center;
-    
+    .current_activity, .activity_success {
+      padding: 28% 0;
+      font-size: 1.8em;
+    }
+    .choice {
+      display: none;
+    }
     h4 {
       margin: 0;
       padding: 0;
@@ -511,29 +592,48 @@ footer {
       margin: 5px 0;
       padding: 0;
     }
-    ul {
+    ul, .items {
       list-style: none;
       margin: 15px auto;
       padding: 0;
       max-width: 300px;
       li {
         margin-bottom: 10px;
-        a {
+      }
+      a {
+        display: block;
+        padding: 15px;
+        border-radius: 8px;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 1.2em;
+        background: $blue;
+        border: 3px solid darken(desaturate($blue, 15%), 5%);
+        box-shadow: 0 3px 0 darken(desaturate($blue, 15%), 5%);
+        &:hover {
+          background: darken($blue, 5%);
+          border: 3px solid darken(desaturate($blue, 15%), 10%);
+          box-shadow: 0 3px 0 darken(desaturate($blue, 15%), 10%);
+        }
+      }
+    }
+    [data-choice-type='gig'] {
+      .items {
+        grid-row: row;
+        display: grid;
+        grid-gap: 10px;
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 90%;
+      }
+      a {
+        b {
           display: block;
-          padding: 15px;
-          border-radius: 8px;
-          color: white;
-          text-decoration: none;
-          font-weight: bold;
-          font-size: 1.2em;
-          background: $blue;
-          border: 3px solid darken(desaturate($blue, 15%), 5%);
-          box-shadow: 0 3px 0 darken(desaturate($blue, 15%), 5%);
-          &:hover {
-            background: darken($blue, 5%);
-            border: 3px solid darken(desaturate($blue, 15%), 10%);
-            box-shadow: 0 3px 0 darken(desaturate($blue, 15%), 10%);
-          }
+          font-size: 1.4em;
+        }
+        span {
+          font-size: .9em;
+          font-weight: 500;
         }
       }
     }

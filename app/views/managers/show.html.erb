@@ -1,35 +1,43 @@
-<h1><%= image_tag @manager.avatar_url, class: 'avatar rounded float-left', width: "50px" %> <%= @manager.name %> <b class="badge badge-success"><%= as_game_currency(@manager.balance) %></b> <% if current_manager == @manager %><small><%= link_to "Edit profile", edit_manager_registration_path, class: 'float-right' %></small><% end %></h1>
-<hr>
-<h2>Bands <%= link_to "Start a new band", new_band_path, class: 'btn btn-primary btn-sm' if current_manager == @manager %></h2>
-<div class="row">
+<div class="band-listing">
   <% @bands.each do |band| %>
-  <div class="col-sm-3 mb-5">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title"><%= link_to band.name, band_path(band) %></h5>
-        <h6 class="card-subtitle mb-2 text-muted"><%= band.genre.name %> - <%= band.genre.style %></h6>
-        <p>Fans: <b><%= band.fans %></b> &bull; Buzz: <b><%= band.buzz %></b></p>
+  <%= link_to(band, class: 'band') do %>
+    <div class="status active">
+      <div class="info">
+        <h3><%= band.name %></h3>
+        <h4><%= band.genre.name %>: <%= band.genre.style %></h4>
+        <h5><u><%= band.fans %></u> fans, <u><%= band.buzz %></u> buzz</h5>
       </div>
-      <% if band.activities.current_activity.try(:last) %>
-      <small class="card-footer endtimes text-center bg-warning text-white">
-        <%= band.activities.current_activity.try(:last).humanize_action %> for <b data-endtimes="<%= band.activities.current_activity.try(:last).ends_at %>"></b>
-      </small>
-      <% end %>
+      <ul>
+        <li><img src="http://avataaars.io/?accessoriesType=Prescription02&avatarStyle=Transparent&clotheType=Overall&eyeType=Cry&eyebrowType=UpDownNatural&facialHairType=BeardLight&hairColor=SilverGray&mouthType=Eating&skinColor=Brown&topType=LongHairShavedSides" alt=""></li>
+        <li><img src="http://avataaars.io/?accessoriesType=Sunglasses&avatarStyle=Transparent&clotheColor=Red&clotheType=CollarSweater&eyeType=Side&eyebrowType=UnibrowNatural&facialHairColor=Auburn&facialHairType=Blank&hairColor=PastelPink&mouthType=Serious&skinColor=Pale&topType=LongHairBun" alt=""></li>
+        <li><img src="http://avataaars.io/?accessoriesType=Blank&avatarStyle=Transparent&clotheColor=Blue01&clotheType=Overall&eyeType=Default&eyebrowType=SadConcernedNatural&facialHairColor=BlondeGolden&facialHairType=BeardMagestic&hairColor=Auburn&mouthType=Serious&skinColor=Yellow&topType=LongHairFrida" alt=""></li>
+        <li><img src="http://avataaars.io/?accessoriesType=Prescription01&avatarStyle=Transparent&clotheColor=PastelYellow&clotheType=BlazerSweater&eyeType=Default&eyebrowType=UnibrowNatural&facialHairColor=BrownDark&facialHairType=Blank&hairColor=BlondeGolden&mouthType=Eating&skinColor=Brown&topType=ShortHairSides" alt=""></li>
+      </ul>
     </div>
-  </div>
+    <% if band.activities.current_activity.try(:last) %>
+    <div class="action">
+      <%= band.activities.current_activity.try(:last).humanize_action %> for <u data-endtimes="<%= band.activities.current_activity.try(:last).ends_at %>"></u>
+    </div>
+    <% end %>
+  <% end %>
   <% end %>
   <% if current_manager == @manager %>
-  <div class="col-sm-3 mb-5">
-    <div class="card">
-      <%= link_to "<i class='fa fa-user-plus' style='font-size:64px'></i><br /> Start a new band".html_safe, new_band_path, class: 'btn btn-success btn-lg card-body' %>
+  <%= link_to(new_band_path, class: 'band new') do %>
+    <div class="status">
+      <div class="info">
+        <i class="fas fa-user-plus"></i>
+        <h3>Start a new band</h3>
+      </div>
     </div>
-  </div>
+  <% end %>
   <% end %>
 </div>
-<hr>
+<!--
+  <hr>
 <h2>Badges</h2>
   <div class="badge-listing">
     <% @badges.each do |badge| %>
     <span class="badge badge-pill badge-secondary" title="<%= badge.description %>"><%= badge.name %></span>
     <% end %>
   </div>
+-->

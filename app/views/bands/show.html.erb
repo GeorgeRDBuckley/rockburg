@@ -163,36 +163,26 @@
     <div class="latest">
       <h5>Latest Release</h5>
       <div class="release">
-        <div class="album-art" data-seed="a"  data-size="70"></div>
+        <% if @last_release %>
+        <div class="album-art" data-seed="<%= @last_release.name %>"  data-size="70"></div>
         <div class="details">
-          <h6>Goth Keytar <small>43</small></h6>
-          <span>April 20, 2018</span>
+          <h6><%= @last_release.name %> <small><%= @last_release.kind %></small></h6>
+          <span><%= @last_release.created_at.strftime('%b %d, %Y') %></span>
         </div>
+        <% end %>
       </div>
     </div>
     <div class="popular">
       <h5>Popular Releases</h5>
+      <% @band.releases.each do |release| %>
       <div class="release">
-        <div class="album-art" data-seed="a" data-size="40"></div>
+        <div class="album-art" data-seed="<%= release.name %>" data-size="40"></div>
         <div class="details">
-          <h6>Goth Keytar <small>43</small></h6>
-          <span>1,582,194</span>
+          <h6><%= release.name %> <small><%= release.kind %></small></h6>
+          <span><%= release.streams.sum(:num_streams).to_i %> streams</span>
         </div>
       </div>
-      <div class="release">
-        <div class="album-art" data-seed="e" data-size="40"></div>
-        <div class="details">
-          <h6>Brunch Kale Chips <small>29</small></h6>
-          <span>981,291</span>
-        </div>
-      </div>
-      <div class="release">
-        <div class="album-art" data-seed="f" data-size="40"></div>
-        <div class="details">
-          <h6>Mixtape Ramps <small>43</small></h6>
-          <span>498,512</span>
-        </div>
-      </div>
+      <% end %>
     </div>
   </div>
   <div class="items">

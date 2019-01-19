@@ -42,6 +42,7 @@ class BandsController < ApplicationController
     end
     authorize(@band)
     @activity = @band.activities.current_activity.try(:last)
+    @last_release = @band.releases.last
   end
 
   def happenings

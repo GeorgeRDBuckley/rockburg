@@ -1,7 +1,7 @@
 <div class="band-listing">
   <% @bands.each do |band| %>
   <%= link_to(band, class: 'band') do %>
-    <div class="status active">
+    <div class="status<% if band.activities.current_activity.try(:last) %> active<% end %>">
       <div class="info">
         <h3><%= band.name %></h3>
         <h4><%= band.genre.name %>: <%= band.genre.style %></h4>

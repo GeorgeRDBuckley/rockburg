@@ -236,13 +236,22 @@ footer {
 }
 
 form {
+  text-align: left;
   .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 25px;
   }
   label {
     display: block;
     margin-bottom: 3px;
     font-size: 1.2em;
+  }
+  .form-radio, .form-check {
+    label {
+      display: inline-block;
+    }
+  }
+  input[type=radio], input[type=checkbox] {
+    display: inline;
   }
   input[type=text] {
     background: $lightgray;
@@ -744,6 +753,8 @@ section.activities {
     .news {
       padding: 20px 0 0 10px;
       ol {
+        max-height: 310px;
+        overflow: auto;
         margin: 0;
         padding:0;
         list-style: none;

@@ -1,7 +1,6 @@
 class ActivitiesController < ApplicationController
   def new
     band = Band.ensure!(params[:band_id])
-    context = nil
 
     if band.overly_fatigued_members? and params[:type] != 'rest'
       skip_authorization
@@ -13,20 +12,20 @@ class ActivitiesController < ApplicationController
     when 'practice'
       context = Activity::Practice.call(
         band: params[:band_id],
-        hours: params[:hours]
+        hours: params[:hours].to_i
       )
 
     when 'write_song'
       context = Activity::WriteSong.call(
         band: params[:band_id],
-        hours: params[:hours]
+        hours: params[:hours].to_i
       )
 
     when 'gig'
       context = Activity::PlayGig.call(
         band: params[:band_id],
         venue: params[:venue],
-        hours: params[:hours] || 2
+        hours: 2
       )
 
     when 'record_single'
@@ -48,13 +47,13 @@ class ActivitiesController < ApplicationController
     when 'rest'
       context = Activity::Rest.call(
         band: params[:band_id],
-        hours: params[:hours]
+        hours: params[:hours].to_i
       )
     else
       raise ArgumentError.new("Unknown Type[#{params[:type]}]")
     end
 
-    if context && context.success?
+    if context&.success?
       authorize(context.activity, "#{params[:type]}?")
 
       if context.activity.save

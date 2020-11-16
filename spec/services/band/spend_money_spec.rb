@@ -14,7 +14,7 @@ RSpec.describe Band::SpendMoney, type: :service do
   it 'should remove money to manager\'s account' do
     expect {
       described_class.call(band: band, amount: 123)
-    }.to change{ band.manager.balance }.by(-123)
+    }.to change { band.manager.balance }.by(-123)
   end
 
   context 'low balance' do

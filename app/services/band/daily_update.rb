@@ -40,7 +40,7 @@ class Band::DailyUpdate < ApplicationService
       streams = calced.streams
 
       context.earnings = earnings
-      #recording.increment!(:sales, earnings)
+      # recording.increment!(:sales, earnings)
 
       release.streams.find_or_create_by(for_date: DateTime.now.to_date, band: band) do |stream|
         stream.num_streams = streams
@@ -65,13 +65,17 @@ class Band::DailyUpdate < ApplicationService
 
     # 0 to ~15% dynamic decay rate; defaults 0 if sentiment not found
     sentiment = ExternalSentiment.most_recent_from('lastfm')
-    impact = ((sentiment.keys.index(band.genre.name) / 3.25) / 10.0) rescue 0
+    impact = begin
+      ((sentiment.keys.index(band.genre.name) / 3.25) / 10.0)
+    rescue StandardError
+      0
+    end
 
     previous_fans = band.fans
     decayed_fans = (band.fans * (0.95 - impact)).ceil # guarantees minimum 5% daily decay + external impact
 
     decayed_amount = previous_fans - decayed_fans
-    
+
     band.update_attributes(fans: decayed_fans)
     band.happenings.create(what: "#{band.name}'s fans decreased by #{decayed_amount} to #{decayed_fans}.", kind: 'fan_decay', activity_id: activity_id)
   end

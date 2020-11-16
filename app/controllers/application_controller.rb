@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   end
 
   def not_implemented
-    raise ActionController::RoutingError.new('Not Implemented')
+    raise ActionController::RoutingError, 'Not Implemented'
   end
 
   private

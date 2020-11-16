@@ -12,6 +12,6 @@ RSpec.describe Band::EarnMoney, type: :service do
 
     expect {
       described_class.call(band: band, amount: 123)
-    }.to change{ band.manager.balance }.by(123)
+    }.to change { band.manager.balance }.by(123)
   end
 end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'Bands', :js => true do
+RSpec.feature 'Bands', js: true do
   scenario 'Manager should be able to create bands' do
     register_manager
     feature_create_band

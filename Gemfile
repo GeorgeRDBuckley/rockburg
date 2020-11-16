@@ -14,9 +14,9 @@ gem 'rails', '~> 6.0.0'
 gem 'puma'
 
 # Data
-gem 'pg'
 gem 'ensurance'  # lets you .ensure your models
 gem 'faker'
+gem 'pg'
 gem 'seedbank'   # seed data organization
 
 # Frontend
@@ -36,9 +36,9 @@ gem 'pundit'
 
 # Background Processing
 gem 'sidekiq'
-gem 'sidekiq-scheduler'
 gem 'sidekiq-failures', github: 'bsharpe/sidekiq-failures', branch: :master
 gem 'sidekiq-global_id'
+gem 'sidekiq-scheduler'
 
 # Email
 gem 'inky-rb', require: 'inky'
@@ -52,18 +52,18 @@ gem 'awesome_print' # print anything in the console
 gem 'colorize' # colored strings are nice for debugging
 gem 'dotiw' # Better distance of time in words for Rails
 gem 'fast_blank' # a booster for .blank?/.present? calls
+gem 'figaro' # environment variables
+gem 'font-awesome-rails' # icons
+gem 'httparty'
 gem 'interactor' # service objects
 gem 'interactor-contracts' # interface contracts for service objects
-gem 'sentry-raven' # logging
-gem 'font-awesome-rails' # icons
-gem 'figaro' # environment variables
 gem 'merit', github: 'Rockburg/merit', branch: :master # badge system
-gem 'httparty'
+gem 'sentry-raven' # logging
 
 group :development, :test do
+  gem 'factory_bot_rails'
   gem 'pry'
   gem 'pry-byebug'
-  gem 'factory_bot_rails'
   gem 'rspec-rails'
 
   gem 'capybara', '~> 2.13'
@@ -73,8 +73,8 @@ end
 group :test do
   gem 'pundit-matchers'
   gem 'rails-controller-testing'
-  gem 'rspec-sidekiq'
   gem 'rspec_junit_formatter'
+  gem 'rspec-sidekiq'
 end
 
 group :development do
@@ -83,9 +83,9 @@ group :development do
 
   gem 'annotate', github: 'ctran/annotate_models', branch: :develop # Annotate models on migration
   gem 'bundleup', require: false # know which gems need updating
+  gem 'foreman', require: false # running background workers
   gem 'hirb', github: 'bsharpe/hirb', branch: :master # nice record display in console
   gem 'rubocop', require: false # style cop
-  gem 'foreman', require: false # running background workers
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

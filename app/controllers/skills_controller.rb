@@ -9,6 +9,6 @@ class SkillsController < ApplicationController
     band = policy_scope(Band).ensure!(params[:band_id])
     members = Member.with_skill(skill).limit(8).order(Arel.sql("RANDOM()"))
 
-    render :show, locals: {skill: skill, band: band, members: members}
+    render :show, locals: { skill: skill, band: band, members: members }
   end
 end

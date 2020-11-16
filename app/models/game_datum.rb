@@ -14,7 +14,6 @@
 #
 
 class GameDatum < ApplicationRecord
-
   def self.get(key)
     self.where(key: key).first&.value
   end

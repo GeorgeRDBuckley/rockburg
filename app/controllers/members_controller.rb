@@ -51,8 +51,11 @@ class MembersController < ApplicationController
   end
 
   def set_band
-    @band = current_manager.bands.find(params[:band_id]) rescue nil
+    @band = begin
+      current_manager.bands.find(params[:band_id])
+    rescue StandardError
+      nil
+    end
     redirect_to root_path, alert: "You can't do that." if @band.nil?
   end
-
 end

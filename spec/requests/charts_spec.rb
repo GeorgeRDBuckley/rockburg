@@ -19,6 +19,5 @@ RSpec.describe "Charts", type: :request do
       get charts_path
       expect(response).to have_http_status(200)
     end
-
   end
 end

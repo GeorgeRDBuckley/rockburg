@@ -1,5 +1,4 @@
 class Band::HireMember < ApplicationService
-
   expects do
     required(:band).filled
     required(:skill).filled

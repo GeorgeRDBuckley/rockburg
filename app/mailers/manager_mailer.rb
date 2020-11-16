@@ -38,17 +38,17 @@ class ManagerMailer < ApplicationMailer
 
     action = @activity.action.sub('_', ' ')
     action = case action
-    when 'practice'          then 'has finished practicing'
-    when 'gig'               then 'has finished playing a gig'
-    when 'hired'             then 'has hired a new member'
-    when 'release'           then 'has finished their release'
-    when 'write song'        then 'has written a song'
-    when 'record single'     then 'has recorded as single'
-    when 'formed'            then 'has formed'
-    when 'fired'             then 'has fired a member'
-    when 'rest'              then 'has rested'
-    when 'recording deleted' then 'has deleted a recording'
-    else action
+             when 'practice'          then 'has finished practicing'
+             when 'gig'               then 'has finished playing a gig'
+             when 'hired'             then 'has hired a new member'
+             when 'release'           then 'has finished their release'
+             when 'write song'        then 'has written a song'
+             when 'record single'     then 'has recorded as single'
+             when 'formed'            then 'has formed'
+             when 'fired'             then 'has fired a member'
+             when 'rest'              then 'has rested'
+             when 'recording deleted' then 'has deleted a recording'
+             else action
     end
 
     mail to: @user.email, subject: default_i18n_subject(band_name: @band.name, action: action)

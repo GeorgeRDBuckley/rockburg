@@ -14,7 +14,7 @@ class Manager::DailyFinancials < ApplicationService
       result = Band::DailyUpdate.call(band: band)
       if result.success?
         Band::SpendMoney.(band: band, amount: result.daily_running_costs)
-        Band::EarnMoney.(band: band, amount: result.earnings )
+        Band::EarnMoney.(band: band, amount: result.earnings)
       else
         # Probably should tell someone that the band couldn't update it's data
       end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'Login', :js => true do
+RSpec.feature 'Login', js: true do
   scenario 'When manager logs in, should see dashboard with activities menu' do
     manager = create(:manager)
     login_manager(manager.email)

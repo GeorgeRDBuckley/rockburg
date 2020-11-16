@@ -1,5 +1,4 @@
 module Generator
-
   def self.band_name
     Faker::Hipster.sentence(2, false, 0).delete('.').titleize
   end
@@ -11,5 +10,4 @@ module Generator
   def self.song_title
     Faker::Hipster.sentence(2, false, 0).delete('.').titleize
   end
-
 end

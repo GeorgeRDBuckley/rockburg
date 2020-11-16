@@ -27,7 +27,7 @@ class Activity < ApplicationRecord
   ACTIVITIES = {
     'practice' => 'Practicing',
     'write_song' => 'Writing a song',
-    'gig'=> 'Playing a gig',
+    'gig' => 'Playing a gig',
     'record_single' => 'Recording a song',
     'release' => 'Releasing music',
     'rest' => 'Resting',
@@ -36,13 +36,13 @@ class Activity < ApplicationRecord
     'song_deleted' => 'Deleted a song',
     'recording_deleted' => 'Deleted a recording',
     'fired' => 'Fired a member',
-    'formed' => 'Formed the band'
+    'formed' => 'Formed the band',
   }.freeze
 
   PAST_ACTIVITIES = {
     'practice' => 'Practiced',
     'write_song' => 'Wrote a song',
-    'gig'=> 'Played a gig',
+    'gig' => 'Played a gig',
     'record_single' => 'Recorded a song',
     'release' => 'Released music',
     'rest' => 'Rested',
@@ -51,7 +51,7 @@ class Activity < ApplicationRecord
     'song_deleted' => 'Deleted a song',
     'recording_deleted' => 'Deleted a recording',
     'fired' => 'Fired a member',
-    'formed' => 'Formed the band'
+    'formed' => 'Formed the band',
   }.freeze
 
   def humanize_action

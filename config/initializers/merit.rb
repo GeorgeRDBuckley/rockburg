@@ -22,29 +22,29 @@ end
 # Create application badges (uses https://github.com/norman/ambry)
 badge_id = 0
 [{
-  id: (badge_id = badge_id+1), #1
+  id: (badge_id += 1), # 1
   name: 'Newbie',
-  description: 'Joined Rockburg'
+  description: 'Joined Rockburg',
 }, {
-  id: (badge_id = badge_id+1), #2
+  id: (badge_id += 1), # 2
   name: 'Fresh Meat',
-  description: 'Started first band'
+  description: 'Started first band',
 }, {
-  id: (badge_id = badge_id+1), #3
+  id: (badge_id += 1), # 3
   name: 'Dreammaker',
-  description: 'Hired first band member'
+  description: 'Hired first band member',
 }, {
-  id: (badge_id = badge_id+1), #4
+  id: (badge_id += 1), # 4
   name: 'Practice Makes Perfect',
-  description: 'First practice'
+  description: 'First practice',
 }, {
-  id: (badge_id = badge_id+1), #5
+  id: (badge_id += 1), # 5
   name: 'Shakespear',
-  description: 'Write first song'
+  description: 'Write first song',
 }, {
-  id: (badge_id = badge_id+1), #6
+  id: (badge_id += 1), # 6
   name: 'Spotlight',
-  description: 'Played first gig'
-}].each do |attrs|
+  description: 'Played first gig',
+},].each do |attrs|
   Merit::Badge.create! attrs
 end

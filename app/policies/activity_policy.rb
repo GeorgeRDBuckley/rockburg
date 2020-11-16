@@ -3,13 +3,13 @@ class ActivityPolicy < ApplicationPolicy
     user.present? && record.band.manager_id == user.id
   end
 
-  [
-    :practice,
-    :write_song,
-    :gig,
-    :record_single,
-    :release,
-    :rest
+  %i[
+    practice
+    write_song
+    gig
+    record_single
+    release
+    rest
   ].each do |symbol|
     define_method "#{symbol}?" do
       new?

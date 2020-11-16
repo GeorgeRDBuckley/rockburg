@@ -18,7 +18,6 @@ RSpec.describe MemberBandPolicy do
     subject { described_class.new(user, member_band) }
 
     it { is_expected.to permit_action(:destroy) }
-
   end
   context 'manager, other band' do
     let(:user) { create(:manager) }

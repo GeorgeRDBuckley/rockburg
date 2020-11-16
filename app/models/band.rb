@@ -45,6 +45,6 @@ class Band < ApplicationRecord
   end
 
   def overly_fatigued_members?
-    members.pluck(:trait_fatigue).any?{|x| x >= 100 }
+    members.pluck(:trait_fatigue).any? {|x| x >= 100 }
   end
 end

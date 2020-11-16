@@ -25,5 +25,5 @@ class Happening < ApplicationRecord
   belongs_to :activity
 
   ## -- SCOPES
-  scope :recent, ->{ order(created_at: :desc) }
+  scope :recent, -> { order(created_at: :desc) }
 end

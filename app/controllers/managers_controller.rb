@@ -6,7 +6,7 @@ class ManagersController < ApplicationController
     @bands = policy_scope(Band).where(manager_id: current_manager.id).all.order(:name)
     @badges = current_manager.badges
 
-    render(:action => 'show')
+    render(action: 'show')
   end
 
   def show
@@ -21,10 +21,9 @@ class ManagersController < ApplicationController
 
   def file_bankruptcy
     authorize(current_manager)
-    if current_manager.bankrupt? and current_manager.file_bankruptcy
+    if current_manager.bankrupt? && current_manager.file_bankruptcy
       redirect_to dashboard_path, alert: "You've filed for bankruptcy. Better luck this time around!"
-    elsif
-      redirect_to dashboard_path
+    elsif redirect_to dashboard_path
     end
   end
 end

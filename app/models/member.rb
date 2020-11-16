@@ -45,8 +45,8 @@ class Member < ApplicationRecord
 
   GENDER_MAP = {
     'M' => 'male',
-    'F' => 'female'
-  }
+    'F' => 'female',
+  }.freeze
   def gender
     GENDER_MAP[super] || super
   end

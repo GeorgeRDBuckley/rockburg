@@ -3,7 +3,7 @@ class ActivitiesController < ApplicationController
     band = Band.ensure!(params[:band_id])
     context = nil
 
-    if band.overly_fatigued_members? and params[:type] != 'rest'
+    if band.overly_fatigued_members? && (params[:type] != 'rest')
       skip_authorization
       redirect_to band_path(band), notice: "Your band is too tired!"
       return
@@ -51,7 +51,7 @@ class ActivitiesController < ApplicationController
         hours: params[:hours]
       )
     else
-      raise ArgumentError.new("Unknown Type[#{params[:type]}]")
+      raise ArgumentError, "Unknown Type[#{params[:type]}]"
     end
 
     if context && context.success?

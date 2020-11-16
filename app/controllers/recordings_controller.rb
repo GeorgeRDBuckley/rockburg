@@ -21,12 +21,20 @@ class RecordingsController < ApplicationController
   private
 
   def set_band
-    @band = current_manager.bands.find(params[:band_id]) rescue nil
+    @band = begin
+      current_manager.bands.find(params[:band_id])
+    rescue StandardError
+      nil
+    end
     redirect_to root_path, alert: "You can't do that." if @band.nil?
   end
 
   def set_recording
-    @recording = @band.recordings.find(params[:id]) rescue nil
+    @recording = begin
+      @band.recordings.find(params[:id])
+    rescue StandardError
+      nil
+    end
     authorize(@recording)
     redirect_to root_path, alert: "You can't do that." if @recording.nil?
   end

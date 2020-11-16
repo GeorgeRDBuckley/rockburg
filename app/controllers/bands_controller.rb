@@ -1,5 +1,5 @@
 class BandsController < ApplicationController
-  layout false, only: [:happenings, :allmembers]
+  layout false, only: %i[happenings allmembers]
   skip_after_action :verify_authorized, only: %i[happenings allmembers]
   after_action :verify_policy_scoped, only: %i[index happenings allmembers]
 

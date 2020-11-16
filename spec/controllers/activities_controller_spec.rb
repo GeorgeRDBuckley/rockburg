@@ -7,7 +7,7 @@ RSpec.describe ActivitiesController, type: :controller do
 
   context '#practice' do
     context 'anonymous' do
-      subject { get(:new, params: { band_id: band.id, type: :practice, hours: 1.minute } ) }
+      subject { get(:new, params: { band_id: band.id, type: :practice, hours: 1.minute }) }
 
       it 'is not allowed' do
         expect(subject).to redirect_to(root_url)
@@ -15,7 +15,7 @@ RSpec.describe ActivitiesController, type: :controller do
     end
 
     context 'manager, your band' do
-      subject { get(:new, params: { band_id: band.id, type: :practice, hours: 1.minute } ) }
+      subject { get(:new, params: { band_id: band.id, type: :practice, hours: 1.minute }) }
       before do
         sign_in current_manager
         subject
@@ -31,7 +31,7 @@ RSpec.describe ActivitiesController, type: :controller do
     end
 
     context 'manager, overly fatigued members' do
-      subject { get(:new, params: { band_id: band.id, type: :practice, hours: 1.minute } ) }
+      subject { get(:new, params: { band_id: band.id, type: :practice, hours: 1.minute }) }
       before do
         sign_in current_manager
         create(:member_band, band: band, member: create(:member, trait_fatigue: 105))
@@ -48,7 +48,7 @@ RSpec.describe ActivitiesController, type: :controller do
     end
 
     context 'manager, other band' do
-      subject { get(:new, params: { band_id: other_band.id, type: :practice, hours: 1.minute } ) }
+      subject { get(:new, params: { band_id: other_band.id, type: :practice, hours: 1.minute }) }
       before { sign_in current_manager }
 
       it 'is not allowed' do
@@ -59,7 +59,7 @@ RSpec.describe ActivitiesController, type: :controller do
 
   context '#write_song' do
     context 'anonymous' do
-      subject { get(:new, params: { band_id: band.id, type: :write_song, hours: 1.minute } ) }
+      subject { get(:new, params: { band_id: band.id, type: :write_song, hours: 1.minute }) }
 
       it 'is not allowed' do
         expect(subject).to redirect_to(root_url)
@@ -67,7 +67,7 @@ RSpec.describe ActivitiesController, type: :controller do
     end
 
     context 'manager, your band' do
-      subject { get(:new, params: { band_id: band.id, type: :write_song, hours: 1.minute } ) }
+      subject { get(:new, params: { band_id: band.id, type: :write_song, hours: 1.minute }) }
       before do
         sign_in current_manager
         subject
@@ -83,7 +83,7 @@ RSpec.describe ActivitiesController, type: :controller do
     end
 
     context 'manager, other band' do
-      subject { get(:new, params: { band_id: other_band.id, type: :write_song, hours: 1.minute } ) }
+      subject { get(:new, params: { band_id: other_band.id, type: :write_song, hours: 1.minute }) }
       before { sign_in current_manager }
 
       it 'is not allowed' do
@@ -96,7 +96,7 @@ RSpec.describe ActivitiesController, type: :controller do
     let(:venue) { create(:venue) }
 
     context 'anonymous' do
-      subject { get(:new, params: { band_id: band.id, type: :gig, venue: venue, hours: 1.minute } ) }
+      subject { get(:new, params: { band_id: band.id, type: :gig, venue: venue, hours: 1.minute }) }
 
       it 'is not allowed' do
         expect(subject).to redirect_to(root_url)
@@ -104,7 +104,7 @@ RSpec.describe ActivitiesController, type: :controller do
     end
 
     context 'manager, your band' do
-      subject { get(:new, params: { band_id: band.id, type: :gig, venue: venue, hours: 1.minute } ) }
+      subject { get(:new, params: { band_id: band.id, type: :gig, venue: venue, hours: 1.minute }) }
       before do
         sign_in current_manager
         subject
@@ -120,7 +120,7 @@ RSpec.describe ActivitiesController, type: :controller do
     end
 
     context 'manager, other band' do
-      subject { get(:new, params: { band_id: other_band.id, type: :gig, venue: venue, hours: 1.minute } ) }
+      subject { get(:new, params: { band_id: other_band.id, type: :gig, venue: venue, hours: 1.minute }) }
       before { sign_in current_manager }
 
       it 'is not allowed' do
@@ -134,7 +134,7 @@ RSpec.describe ActivitiesController, type: :controller do
     let(:recording) { create(:recording, band: band, studio: studio) }
 
     context 'anonymous' do
-      subject { get(:new, params: { band_id: band.id, type: :release, recording_ids: [recording.id], release: { name: Faker::FunnyName.name, kind: :album }, hours: 1.minute } ) }
+      subject { get(:new, params: { band_id: band.id, type: :release, recording_ids: [recording.id], release: { name: Faker::FunnyName.name, kind: :album }, hours: 1.minute }) }
 
       it 'is not allowed' do
         expect(subject).to redirect_to(root_url)
@@ -142,7 +142,7 @@ RSpec.describe ActivitiesController, type: :controller do
     end
 
     context 'manager, your band' do
-      subject { get(:new, params: { band_id: band.id, type: :release, recording_ids: [recording.id], release: { name: Faker::FunnyName.name, kind: :album }, hours: 1.minute } ) }
+      subject { get(:new, params: { band_id: band.id, type: :release, recording_ids: [recording.id], release: { name: Faker::FunnyName.name, kind: :album }, hours: 1.minute }) }
       before do
         sign_in current_manager
         subject
@@ -158,7 +158,7 @@ RSpec.describe ActivitiesController, type: :controller do
     end
 
     context 'manager, other band' do
-      subject { get(:new, params: { band_id: other_band.id, type: :release, recording_ids: [recording.id], release: { name: Faker::FunnyName.name, kind: :album }, hours: 1.minute } ) }
+      subject { get(:new, params: { band_id: other_band.id, type: :release, recording_ids: [recording.id], release: { name: Faker::FunnyName.name, kind: :album }, hours: 1.minute }) }
       before do
         recording.update!(band: other_band)
         sign_in current_manager
@@ -172,7 +172,7 @@ RSpec.describe ActivitiesController, type: :controller do
 
   context '#rest' do
     context 'anonymous' do
-      subject { get(:new, params: { band_id: band.id, type: :rest, hours: 1.minute } ) }
+      subject { get(:new, params: { band_id: band.id, type: :rest, hours: 1.minute }) }
 
       it 'is not allowed' do
         expect(subject).to redirect_to(root_url)
@@ -180,7 +180,7 @@ RSpec.describe ActivitiesController, type: :controller do
     end
 
     context 'manager, your band' do
-      subject { get(:new, params: { band_id: band.id, type: :rest, hours: 1.minute } ) }
+      subject { get(:new, params: { band_id: band.id, type: :rest, hours: 1.minute }) }
       before do
         sign_in current_manager
         subject
@@ -196,7 +196,7 @@ RSpec.describe ActivitiesController, type: :controller do
     end
 
     context 'manager, other band' do
-      subject { get(:new, params: { band_id: other_band.id, type: :rest, hours: 1.minute } ) }
+      subject { get(:new, params: { band_id: other_band.id, type: :rest, hours: 1.minute }) }
       before { sign_in current_manager }
 
       it 'is not allowed' do

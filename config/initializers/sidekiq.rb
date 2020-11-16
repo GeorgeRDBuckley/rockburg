@@ -8,7 +8,6 @@ if Rails.env.production?
     config.redis = { url: ENV['REDIS_URL'] }
     config.average_scheduled_poll_interval = 1
 
-
     # TODO: This should really be turned on to autoscale the number of DB connections available to sidekiq
     # Rails.application.config.after_initialize do
     #   Rails.logger.info("DB Connection Pool size for Sidekiq Server before disconnect is: #{ActiveRecord::Base.connection.pool.instance_variable_get("@size")}".yellow)

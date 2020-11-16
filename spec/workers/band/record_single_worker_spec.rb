@@ -9,7 +9,7 @@ RSpec.describe Band::RecordSingleWorker, type: :worker do
   let(:song) { create(:song, band: band) }
   let(:recording) { @recording }
   let(:hours) { 1 }
-  let(:activity) { create :activity, action: :record_single, starts_at: Time.current, ends_at: Time.current+ hours * ENV["SECONDS_PER_GAME_HOUR"].to_i }
+  let(:activity) { create :activity, action: :record_single, starts_at: Time.current, ends_at: Time.current + hours * ENV["SECONDS_PER_GAME_HOUR"].to_i }
 
   before do
     band.add_member(member1, skill: member1.primary_skill)

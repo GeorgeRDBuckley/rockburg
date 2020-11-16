@@ -22,7 +22,7 @@ RSpec.describe Activity::PlayGig, type: :service do
         expect(result.success?).to eq(true)
         expect(result.activity).to be_present
       end
-    }.to change{ band.gigs.count }.by(1)
+    }.to change { band.gigs.count }.by(1)
 
     member1.reload
     member2.reload

@@ -1,7 +1,6 @@
 module Lastfm
-
-  BASE_URL = 'http://ws.audioscrobbler.com'
-  VERSION = '/2.0/'
+  BASE_URL = 'http://ws.audioscrobbler.com'.freeze
+  VERSION = '/2.0/'.freeze
 
   class << self
     def sentiment(result = {})
@@ -11,6 +10,7 @@ module Lastfm
       external_genres.each do |external|
         local_genres.each do |local|
           next unless external[0].include?(local.downcase) # genre mapping
+
           result[local] ? result[local] += external[1] : result[local] = external[1]
         end
       end
@@ -42,6 +42,7 @@ module Lastfm
 
       artists.each do |artist|
         next if artist['mbid'].blank? # not all artists have music brain ID
+
         tags = top_tags(artist['mbid'])
 
         tags[0..4].each do |tag|
@@ -50,8 +51,7 @@ module Lastfm
       end
 
       # {"rock"=>2780, "pop"=>1810, "indie"=>1696, "rnb"=>1412}
-      result.sort_by { |_,v| v }.reverse.to_h
+      result.sort_by { |_, v| v }.reverse.to_h
     end
   end
-
 end

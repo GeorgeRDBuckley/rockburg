@@ -14,7 +14,7 @@ class Band::WriteSong < ApplicationService
   end
 
   def call
-    Band::AddFatigue.(band: band, range: (2*hours)..(5*hours), activity: activity)
+    Band::AddFatigue.(band: band, range: (2 * hours)..(5 * hours), activity: activity)
 
     skill_mp = 50
     creativity_mp = 15
@@ -27,8 +27,8 @@ class Band::WriteSong < ApplicationService
     total_ego = band.members.sum(:trait_ego)
 
     possible_points = (member_multiplyer * skill_mp) +
-      (member_multiplyer * creativity_mp) +
-      (24 * time_mp)
+                      (member_multiplyer * creativity_mp) +
+                      (24 * time_mp)
 
     quality = 100
 

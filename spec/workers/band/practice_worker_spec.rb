@@ -7,7 +7,7 @@ RSpec.describe Band::PracticeWorker, type: :worker do
   let(:member2) { create(:member, primary_skill: Skill.find_by_name('Drummer')) }
 
   let(:hours) { 1 }
-  let(:activity) { create :activity, action: :practice, starts_at: Time.current, ends_at: Time.current+ hours * ENV["SECONDS_PER_GAME_HOUR"].to_i }
+  let(:activity) { create :activity, action: :practice, starts_at: Time.current, ends_at: Time.current + hours * ENV["SECONDS_PER_GAME_HOUR"].to_i }
 
   before do
     band.add_member(member1, skill: member1.primary_skill)

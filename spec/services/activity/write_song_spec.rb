@@ -18,6 +18,6 @@ RSpec.describe Activity::WriteSong, type: :service do
         expect(result.success?).to eq(true)
         expect(result.activity).to be_present
       end
-    }.to change{ band.songs.count }.by(1)
+    }.to change { band.songs.count }.by(1)
   end
 end

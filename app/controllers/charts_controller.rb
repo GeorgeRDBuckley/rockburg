@@ -18,6 +18,6 @@ class ChartsController < ApplicationController
 
   def releases
     skip_policy_scope
-    #@releases = Release.join(:streams).order(num_streams: :desc).limit(30)
+    # @releases = Release.join(:streams).order(num_streams: :desc).limit(30)
   end
 end

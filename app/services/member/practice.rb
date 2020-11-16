@@ -24,7 +24,6 @@ class Member::Practice < ApplicationService
         member.trait_fatigue += increase_fatigue
       end
 
-
       context.skill_change = increase_skill
       context.fatigue_change = increase_fatigue
 

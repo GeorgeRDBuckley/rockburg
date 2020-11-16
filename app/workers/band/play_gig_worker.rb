@@ -8,9 +8,9 @@ class Band::PlayGigWorker < Band::ActivityWorker
     activity = Activity.ensure(activity)
 
     announce_completion band, activity,
-      band_fans: band.fans,
-      band_buzz: band.buzz,
-      balance: "#{as_game_currency(band.manager.balance)}"
+                        band_fans: band.fans,
+                        band_buzz: band.buzz,
+                        balance: as_game_currency(band.manager.balance).to_s
 
     band.manager.add_badge(6) unless band.manager.badges.collect(&:id).include?(6)
   end

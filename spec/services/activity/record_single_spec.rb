@@ -21,7 +21,7 @@ RSpec.describe Activity::RecordSingle, type: :service do
         expect(result.success?).to eq(true)
         expect(result.activity).to be_present
       end
-    }.to change{ band.recordings.count }.by(1)
+    }.to change { band.recordings.count }.by(1)
     band.manager.reload
     expect(balance).to be > band.manager.balance
   end

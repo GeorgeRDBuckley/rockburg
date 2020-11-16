@@ -45,7 +45,6 @@ RSpec.describe Manager, type: :model do
     mgr = band.manager
     expect {
       band.destroy
-    }.to change{mgr.bands_count}.by(-1)
+    }.to change {mgr.bands_count}.by(-1)
   end
-
 end

@@ -33,5 +33,4 @@ class Recording < ApplicationRecord
   def full_recording
     "#{name} - (#{kind} -- Quality: #{quality})"
   end
-
 end

@@ -21,6 +21,6 @@ FactoryBot.define do
 
     action { :practice }
     starts_at { Time.now.utc }
-    ends_at  { Faker::Date.forward(5.minutes) }
+    ends_at { Faker::Date.forward(5.minutes) }
   end
 end

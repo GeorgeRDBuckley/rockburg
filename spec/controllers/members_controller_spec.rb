@@ -131,7 +131,6 @@ RSpec.describe MembersController, type: :controller do
     end
   end
 
-
   # context '#update' do
   #   before { get(:update) }
 

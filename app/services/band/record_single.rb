@@ -33,16 +33,16 @@ class Band::RecordSingle < ApplicationService
     total_ego = band.members.sum(:trait_ego).to_i
 
     possible_points = (member_multiplyer * skill_mp) +
-      (member_multiplyer * creativity_mp) +
-      (Studio.order(:weight).last.weight * studio_mp) +
-      (100 * song_mp)
+                      (member_multiplyer * creativity_mp) +
+                      (Studio.order(:weight).last.weight * studio_mp) +
+                      (100 * song_mp)
 
     quality = 100
 
     points = (total_skills * skill_mp) +
-      (total_creativity * creativity_mp) +
-      (studio.weight * studio_mp) +
-      (song_quality * song_mp)
+             (total_creativity * creativity_mp) +
+             (studio.weight * studio_mp) +
+             (song_quality * song_mp)
 
     ego_weight = (total_ego * ego_mp).to_f / possible_points.to_f
     total = quality * (points.to_f / possible_points.to_f)

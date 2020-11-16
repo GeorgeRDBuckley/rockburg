@@ -2,7 +2,7 @@
 require 'spec_helper'
 ENV['RAILS_ENV'] = 'test'
 require File.expand_path('../config/environment', __dir__)
-require_relative '../lib/lastfm.rb'
+require_relative '../lib/lastfm'
 
 # Prevent database truncation if the environment is production
 

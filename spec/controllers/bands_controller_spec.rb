@@ -36,12 +36,12 @@ RSpec.describe BandsController, type: :controller do
     let(:band) do
       {
         name: Generator.band_name,
-        genre_id: Genre.first.id
+        genre_id: Genre.first.id,
       }
     end
 
     context 'anonymous' do
-      subject { post(:create, params: { band: band } ) }
+      subject { post(:create, params: { band: band }) }
 
       it 'is not allowed' do
         expect(subject).to redirect_to(root_url)
@@ -52,7 +52,7 @@ RSpec.describe BandsController, type: :controller do
       before { sign_in create(:manager) }
 
       context 'creates band' do
-        before { post(:create, params: { band: band } ) }
+        before { post(:create, params: { band: band }) }
 
         it 'renders 302 status code' do
           expect(response.status).to be(302)

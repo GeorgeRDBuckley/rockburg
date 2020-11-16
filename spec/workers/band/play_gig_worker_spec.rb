@@ -4,7 +4,7 @@ RSpec.describe Band::PlayGigWorker, type: :worker do
   let(:band) { create :band }
   let(:gig) { create :gig, band: band, venue: create(:venue) }
   let(:hours) { 1 }
-  let(:activity) { create :activity, action: :gig, starts_at: Time.current, ends_at: Time.current+ hours * ENV["SECONDS_PER_GAME_HOUR"].to_i }
+  let(:activity) { create :activity, action: :gig, starts_at: Time.current, ends_at: Time.current + hours * ENV["SECONDS_PER_GAME_HOUR"].to_i }
 
   subject do
     Sidekiq::Testing.inline! do

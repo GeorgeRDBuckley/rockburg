@@ -48,5 +48,4 @@ RSpec.describe Activity::ReleaseRecording, type: :service do
       end
     end
   end
-
 end
